@@ -2,9 +2,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float controlSpeed = 40f;
+    [SerializeField] float controlSpeed = 25f;
     [SerializeField] float xClampRange = 11f, yClampRange = 7f;
 
+    [SerializeField] float controlPitchFactor = 25f;
+    [SerializeField] float controlRollFactor = 25f;
+    [SerializeField] float rollSpeed = 10f;
+    [SerializeField] float pitchSpeed = 10f;
     Vector2 movement;
     void Update()
     {
@@ -31,7 +35,12 @@ public class PlayerMovement : MonoBehaviour
     
     void ProcessRotation()
     {
-        
+        float pitch = -controlPitchFactor * movement.y;
+        float roll = -controlRollFactor * movement.x;
+
+        Quaternion targetRotation = Quaternion.Euler(pitch, 0f, roll);
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, rollSpeed * Time.deltaTime);
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, pitchSpeed * Time.deltaTime);
     }
 
 }
