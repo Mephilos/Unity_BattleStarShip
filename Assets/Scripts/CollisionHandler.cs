@@ -3,6 +3,7 @@ using UnityEngine;
 public class CollisionHandler : MonoBehaviour
 {
     [SerializeField] Collider[] hitboxes;
+    [SerializeField] GameObject playerDestroyVFX;
 
     void Start()
     {
@@ -16,6 +17,7 @@ public class CollisionHandler : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Hit {other.gameObject.name}");
+        Instantiate(playerDestroyVFX, this.transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
     }
 }

@@ -5,7 +5,7 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] GameObject[] laserParticles;
     [SerializeField] RectTransform crosshair;
     [SerializeField] Transform targetPoint;
-    [SerializeField] float targetDistance = 100f;
+    float targetDistance = 200f;
     bool isFiring = false;
 
     void Start()
